@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/buttonOpenFullTable"
+        android:layout_width="378dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="openFullTableClick"
+        android:text="Open Full Table"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddStudent" />
+
+    <ScrollView
+        android:id="@+id/scrollViewGroups"
+        android:layout_width="320dp"
+        android:layout_height="243dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableLayout
+            android:id="@+id/groupsTable"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:verticalScrollbarPosition="right"></TableLayout>
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/buttonAddGroup"
+        android:layout_width="125dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="buttonAddGroupClick"
+        android:text="Add group"
+        app:layout_constraintBottom_toTopOf="@+id/scrollViewStudents"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextGroupName"
+        app:layout_constraintTop_toBottomOf="@+id/scrollViewGroups" />
+
+    <EditText
+        android:id="@+id/editTextGroupName"
+        android:layout_width="166dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/scrollViewStudents"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAddGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollViewGroups" />
+
+    <ScrollView
+        android:id="@+id/scrollViewStudents"
+        android:layout_width="320dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNewStudentName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddGroup">
+
+        <TableLayout
+            android:id="@+id/studentsTable"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="horizontal"
+            android:verticalScrollbarPosition="right"></TableLayout>
+    </ScrollView>
+
+    <EditText
+        android:id="@+id/editTextNewStudentName"
+        android:layout_width="383dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="2dp"
+        android:ems="10"
+        android:hint="student's name"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerGroups"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollViewStudents" />
+
+    <Button
+        android:id="@+id/buttonAddStudent"
+        android:layout_width="381dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="addStudentClick"
+        android:text="Add student"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOpenFullTable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerGroups" />
+
+    <Spinner
+        android:id="@+id/spinnerGroups"
+        android:layout_width="380dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewStudentName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
