@@ -11,7 +11,11 @@ import com.example.lab7.data.MainDb
 import com.example.lab7.data.MainDbDao
 import com.example.lab7.databinding.ActivityJointTableBinding
 import com.example.lab7.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.forEach
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class JointTable : AppCompatActivity() {
 
@@ -32,25 +36,37 @@ class JointTable : AppCompatActivity() {
         finish()
     }
 
-    fun buttonGetStudnetsWithGroupsClick(view: View) {
-        Thread {
-            binding.textViewStudentsWithGroups.text = ""
-            binding.textViewStudentsWithGroups.append("group_id\tgroup_number\tstudent_id\titem.student_name\n")
-            dao.getAllStudentsWithGroups().forEach {
-                item ->
-                binding.textViewStudentsWithGroups.append("${item.group_id}\t${item.group_number}\t${item.student_id}\t${item.student_name}\n")
+    fun buttonGetStudentsWithGroupsClick(view: View) {
+        GlobalScope.launch {
+            val studentsWithGroups = withContext(Dispatchers.IO) {
+                dao.getAllStudentsWithGroups()
             }
-        }.start()
+
+            withContext(Dispatchers.Main) {
+                binding.textViewStudentsWithGroups.text = ""
+                binding.textViewStudentsWithGroups.append("group_id\tgroup_number\tstudent_id\tstudent_name\n")
+                studentsWithGroups.forEach { item ->
+                    binding.textViewStudentsWithGroups.append("${item.group_id}\t${item.group_number}\t${item.student_id}\t${item.student_name}\n")
+                }
+            }
+        }
     }
 
     fun buttonGetStudentsByGroupClick(view: View) {
-        Thread {
-            binding.textViewStudentsWithGroups.text = ""
-            binding.textViewStudentsWithGroups.append("student_id\titem.student_name\n")
-            dao.getStudnentsByGroupNumber(binding.editTextNumberOfGroupToFind.text.toString()).forEach {
-                item ->
-                binding.textViewStudentsWithGroups.append("${item.id}\t${item.name}\n")
+        GlobalScope.launch {
+            val studentsByGroup = withContext(Dispatchers.IO)
+            {
+                dao.getStudnentsByGroupNumber(binding.editTextNumberOfGroupToFind.text.toString())
             }
-        }.start()
+
+            withContext(Dispatchers.Main) {
+                binding.textViewStudentsWithGroups.text = ""
+                binding.textViewStudentsWithGroups.append("student_id\titem.student_name\n")
+                studentsByGroup.forEach {
+                    item ->
+                    binding.textViewStudentsWithGroups.append("${item.id}\t${item.name}\n")
+                }
+            }
+        }
     }
 }
